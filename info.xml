@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 <extension key="nl.onvergetelijk.movereg" type="module">
   <file>movereg</file>
-  <name>Move Event Registration</name>
-  <description>Verplaats een deelnemer naar een ander actief event in het huidige jaar via het CiviCRM actie-menu.</description>
+  <name>Onvergetelijk - Movereg</name>
+  <description>Verplaats een deelnemer naar een ander actief event via het actie-menu</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>Richard van Oosterhout</author>
     <email>richard.van.oosterhout@gmail.com</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">https://github.com/onvergetelijk/nl.onvergetelijk.movereg</url>
-    <url desc="Documentation">https://github.com/onvergetelijk/nl.onvergetelijk.movereg/wiki</url>
-    <url desc="Support">https://github.com/onvergetelijk/nl.onvergetelijk.movereg/issues</url>
+    <url desc="Main Extension Page">https://www.onvergetelijk.nl</url>
+    <url desc="Documentation">https://www.onvergetelijk.nl</url>
+    <url desc="Support">https://www.onvergetelijk.nl</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
-  <releaseDate>2026-03-27</releaseDate>
-  <version>1.0.0</version>
+  <releaseDate>2026-04-27</releaseDate>
+  <version>3.0.0</version>
   <develStage>stable</develStage>
   <compatibility>
-    <ver>6.11</ver>
+    <ver>6.13</ver>
   </compatibility>
-  <comments>Eerste versie van de Move Registration module voor intern gebruik.</comments>
+  <comments>Onderdeel van de Onvergetelijk-extensie-suite voor Stichting Onvergetelijke Zomerkampen. Compatibel met CiviCRM 6.13, PHP 8.4 en Smarty 5.</comments>
   <classloader>
     <psr0 prefix="CRM_" path="."/>
     <psr4 prefix="Civi\" path="Civi"/>
