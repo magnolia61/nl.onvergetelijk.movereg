@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/movereg</path>
+    <page_callback>CRM_Movereg_Form_MoveRegistration</page_callback>
+    <title>Move Event Registration</title>
+    <access_arguments>access CiviEvent</access_arguments>
+  </item>
+</menu>
