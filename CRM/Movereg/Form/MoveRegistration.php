@@ -22,7 +22,7 @@ class CRM_Movereg_Form_MoveRegistration extends CRM_Core_Form {
 			CRM_Core_Error::fatal(ts('You do not have permission to access this page.'));
 		}
 		
-		$extdebug			= 1;
+		$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 		$this->_participantId		= CRM_Utils_Request::retrieve('id', 'Positive', $this);
 
 		wachthond($extdebug, 2, "########################################################################");
@@ -58,7 +58,7 @@ class CRM_Movereg_Form_MoveRegistration extends CRM_Core_Form {
 	 * Bouw het formulier op met uitsluitend het AJAX EntityRef veld.
 	 */
 	public function buildQuickForm() {
-		$extdebug			= 1;
+		$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 
 		wachthond($extdebug, 2, "########################################################################");
 		wachthond($extdebug, 1, "### OPBOUWEN FORMULIER VELDEN EN VALIDATIE", "[ALLPART]");
@@ -99,7 +99,7 @@ class CRM_Movereg_Form_MoveRegistration extends CRM_Core_Form {
 	 */
 	public static function formRule($fields, $files, $self) {
 		$errors				= [];
-		$extdebug			= 1;
+		$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 
 		if (!empty($fields['nieuw_event_id'])) {
 			
@@ -138,7 +138,7 @@ class CRM_Movereg_Form_MoveRegistration extends CRM_Core_Form {
 	 * Verwerk de verplaatsing in de database (inclusief automatische source-tekst vervanging en CORE trigger).
 	 */
 	public function postProcess() {
-		$extdebug			= 1;
+		$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 		$waarden			= $this->exportValues();
 		
 		$participant_id			= $waarden['participant_id']		?? NULL;
@@ -172,21 +172,12 @@ class CRM_Movereg_Form_MoveRegistration extends CRM_Core_Form {
 		wachthond($extdebug, 1, "### UPDATE DE REGISTRATIE NAAR HET NIEUWE EVENT EN TRIGGER CORE", "[ALLPART]");
 		wachthond($extdebug, 2, "########################################################################");
 
-		$params_update = [
-			'checkPermissions'	=> FALSE,
-			'debug'			=> $extdebug,
-			'values'		=> [
-				'event_id'					=> $nieuw_event_id,
-				'source'					=> $slimme_source,
-				'PART_DEEL.trigger_deel'	=> date('Y-m-d H:i:s'),
-			],
-			'where'			=> [
-				['id',				'=',	$participant_id],
-			],
+		$data_update = [
+			'event_id'				=> $nieuw_event_id,
+			'source'				=> $slimme_source,
+			'PART_DEEL.trigger_deel'	=> date('Y-m-d H:i:s'),
 		];
-		wachthond($extdebug, 7, 'params_update',						$params_update);
-		$result_update			= civicrm_api4('Participant', 'update',	$params_update);
-		wachthond($extdebug, 9, 'result_update',						$result_update);
+		$result_update = base_api_wrapper('Participant', (int)$participant_id, $data_update, "MOVEREG_UPDATE", $extdebug);
 
 		if (!empty($result_update)) {
 			

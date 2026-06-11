@@ -35,7 +35,7 @@ function movereg_civicrm_xmlMenu(&$files) {
  */
 function movereg_civicrm_links($op, $objectName, $objectId, &$links, &$mask, &$values) {
 
-	$extdebug			= 0;
+	$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 
 	if ($objectName == 'Participant') {
 		$toegestane_ops			= ['participant.selector.row', 'participant.contact.row'];
@@ -67,7 +67,7 @@ function movereg_civicrm_links($op, $objectName, $objectId, &$links, &$mask, &$v
  */
 function movereg_civicrm_searchKitTasks(array &$tasks, bool $checkPermissions, ?int $userID) {
 
-	$extdebug			= 0;
+	$extdebug = 'movereg'; // Kanaal voor centrale debug-config; niveau wordt opgezocht in ozk.debug.config.php
 
 //	wachthond($extdebug, 2, "########################################################################");
 //	wachthond($extdebug, 2, "### INJECT BULK TASK IN SEARCHKIT", 						 "[SEACRHKIT]");
